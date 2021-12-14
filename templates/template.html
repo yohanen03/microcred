@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <title>Klasifikasi Buah</title>
+    </head>
+  
+<style>
+  ::placeholder {
+    color:rgb(13, 13, 14);
+    opacity:0.8; /* Firefox */
+    font-weight: bold;
+  }
+  </style>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+  <script>
+
+    $("#file-picker").change(function(){
+
+        var input = document.getElementById('file-picker');
+
+        for (var i=0; i<input.files.length; i++)
+        {
+            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+
+            if ((ext == 'jpg') || (ext == 'png'))
+            {
+                $("#msg").text("Files are supported")
+            }
+            else
+            {
+                $("#msg").text("Files are NOT supported")
+                document.getElementById("file-picker").value ="";
+            }
+
+        }
+
+
+    } );
+
+</script>
+
+</head>
+    <header class="flex gap-x-8 justify-center items-center h-32 bg-green-300">
+            <img src="http://www.dikti.go.id/microcredential-ai/assets/1.png" alt="Logo" style="width:200px">
+            <img
+                class="h-16"
+                src="http://www.dikti.go.id/microcredential-ai/assets/kampus-merdeka.png"
+                alt=""
+            />
+            <img
+                class="h-16"
+                src="http://www.dikti.go.id/microcredential-ai/assets/2.png"
+                alt=""
+            />
+        </header>
+        <section
+            class="
+                flex
+                justify-center
+                items-center
+                w-screen
+                h-screen
+                bg-green-300
+            "
+        >
+            <main
+                class="
+                    flex flex-col
+                    justify-center
+                    items-center
+                    p-16
+                    bg-gray-50	
+                    shadow-md
+                    rounded-lg
+                "
+            >
+
+<div class="login card" style="color: orangered;">
+Uploaded Image: 
+<br><br>
+<img src=" {{url_for('send_image', filename=image_name)}}" style="width:300px;height:300px;">
+<br>
+{{text}}
+<a style="text-decoration: none; display: block; margin: 20px auto;" class="btn btn-primary btn-block btn-large" href="/" role="button">Predict Another image</a>
+</div>
+
+</body>
+</html>
